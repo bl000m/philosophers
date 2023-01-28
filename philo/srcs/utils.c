@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 13:07:21 by mpagani           #+#    #+#             */
-/*   Updated: 2023/01/28 13:09:12 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2023/01/28 16:34:07 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,12 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	return (result * sign);
+}
+
+t_time	get_timestamp(void)
+{
+	struct timeval	timestamp;
+
+	gettimeofday(&timestamp, NULL);
+	return (timestamp.tv_sec * 1000 + timestamp.tv_usec *1000);
 }

@@ -6,7 +6,7 @@
 #    By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/28 11:56:12 by mpagani           #+#    #+#              #
-#    Updated: 2023/01/28 13:10:34 by mpagani          ###   ########lyon.fr    #
+#    Updated: 2023/01/28 14:01:21 by mpagani          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJS	= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # compile
 CC 			= cc
-CFLAGS 		= -Wall -Werror -Wextra
+CFLAGS 		= -Wall -Werror -Wextra #-pthread
 
 # directories
 SRCS_DIR	= ./srcs
