@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 12:10:00 by mpagani           #+#    #+#             */
-/*   Updated: 2023/01/28 16:39:35 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2023/01/30 13:54:07 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int argc, char *argv[])
 {
-	t_philo			*data;
+	t_rules			*data;
 
-	check_error(argc);
+	check_error(argc, argv);
 	data = init_data(argc, argv);
 	creating_philosophers(data);
 	//creating philo/threads depending on argv[1]
@@ -25,34 +25,30 @@ int	main(int argc, char *argv[])
 	//loop threads calling routine func(sleep, eat, think)
 	//check_if_need_to_die =>
 	//parsing
-	pthread_mutex_destroy(&data->mutex_philo);
+	pthread_mutex_destroy(&data->philo->mutex_fork);
 	return (0);
 }
 
 void	*lifecycle(void *arg)
 {
-	int	philo_x;
+	t_philo	*philo;
 
-	philo_x = *(int *)arg;
-	// pthread_mutex_lock(&data->mutex_philo);
-	printf("%llu: philo n.%d has taken a fork\n", get_timestamp(), philo_x);
-	// pthread_mutex_unlock(&data->mutex_philo);
-	free(arg);
+	philo = (t_philo *)arg;
+	pthread_mutex_lock(&philo->mutex_fork);
+	printf("%lld: philo n.%d has taken a fork\n", timestamp_delta(philo), philo->n);
+	pthread_mutex_unlock(&philo->mutex_fork);
 	return (0);
 }
 
-void	creating_philosophers(t_philo *data)
+void	creating_philosophers(t_rules *data)
 {
-	pthread_t philo[data->n_philo];
 	int	i;
-	int	*philo_x;
 
 	i = 1;
 	while (i <= data->n_philo)
 	{
-		philo_x = malloc(sizeof(int));
-		*philo_x = i;
-		if (pthread_create(&philo[i], NULL, &lifecycle, philo_x) != 0)
+		data->philo[i].n = i;
+		if (pthread_create(&data->philo[i].life, NULL, &lifecycle, &(data->philo[i])) != 0)
 		{
 			perror("failed to create philo");
 			// free all
@@ -63,7 +59,7 @@ void	creating_philosophers(t_philo *data)
 	i = 1;
 	while (i <= data->n_philo)
 	{
-		if (pthread_join(philo[i], NULL) != 0)
+		if (pthread_join(data->philo[i].life, NULL) != 0)
 		{
 			perror("failed to ?");
 			// free all ?
