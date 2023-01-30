@@ -6,14 +6,14 @@
 #    By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/28 11:56:12 by mpagani           #+#    #+#              #
-#    Updated: 2023/01/28 14:01:21 by mpagani          ###   ########lyon.fr    #
+#    Updated: 2023/01/30 14:50:48 by mpagani          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo
 
 # mandatory srcs / obj files
-SRCS	= roadmap.c error_management.c settings.c utils.c
+SRCS	= roadmap.c error_management.c settings.c utils.c memory.c
 
 OBJS	= $(SRCS:%.c=$(OBJDIR)/%.o)
 

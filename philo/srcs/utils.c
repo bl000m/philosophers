@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 13:07:21 by mpagani           #+#    #+#             */
-/*   Updated: 2023/01/30 13:50:40 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2023/01/30 17:58:21 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,16 @@ t_time	timestamp(void)
 t_time	timestamp_delta(t_philo *philo)
 {
 	return (timestamp() - philo->start);
+}
+
+void	message(t_philo *philo, char flag)
+{
+	pthread_mutex_lock(&philo->message_out);
+	if (flag == 'f')
+		printf("%llu: philo n.%d has taken a fork\n",
+			timestamp_delta(philo), philo->n);
+	else if (flag == 'e')
+		printf("%llu: philo n.%d is eating\n",
+			timestamp_delta(philo), philo->n);
+	pthread_mutex_unlock(&philo->message_out);
 }

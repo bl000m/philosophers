@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 12:22:06 by mpagani           #+#    #+#             */
-/*   Updated: 2023/01/30 13:54:33 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2023/01/30 17:59:34 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ t_rules	*init_data(int argc, char *argv[])
 		data->n_meals = ft_atoi(argv[5]);
 	data->philo = malloc(sizeof(t_philo) * data->n_philo);
 	if (!(data->philo))
-		error_manager(2);
+		error_manager(2, data);
 	// else if (argc == 5)
 	// 	data->n_meals = ;
-	pthread_mutex_init(&data->philo->mutex_fork, NULL);
 	return (data);
 }

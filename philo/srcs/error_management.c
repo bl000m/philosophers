@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 12:25:14 by mpagani           #+#    #+#             */
-/*   Updated: 2023/01/30 13:36:41 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2023/01/30 17:05:14 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,15 @@ void	check_error(int argc, char *argv[])
 	}
 }
 
-void	error_manager(int	error)
+void	error_manager(int	error, t_rules *data)
 {
 	if (error == 2)
 		perror("error allocating memory for the life of a philosopher");
-	//free
+	if (error == 3)
+		perror("error initializing the message_out feature");
+	if (error == 4)
+		perror("error creating a philosopher/thread");
+	if (error == 5)
+		perror("error joining a philosopher/thread");
+	free_all(data);
 }
