@@ -18,7 +18,7 @@ SRCS	= roadmap.c error_management.c settings.c utils.c memory.c
 OBJS	= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # compile
-CC 			= cc
+CC 			= cc #-ggdb3 #-fsanitize=address -g3
 CFLAGS 		= -Wall -Werror -Wextra #-pthread
 
 # directories

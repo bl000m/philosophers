@@ -57,6 +57,13 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->eating);
 }
 
+void	sleeping(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->sleeping);
+	message(philo, 's');
+	pthread_mutex_unlock(&philo->sleeping);
+}
+
 void	*lifecycle(void *arg)
 {
 	t_philo	*philo;
@@ -66,6 +73,8 @@ void	*lifecycle(void *arg)
 	// {
 		taking_fork(philo);
 		eating(philo);
+		sleeping(philo);
+		//thinking(philo);
 	// }
 	return (0);
 }
@@ -78,6 +87,8 @@ void	creating_philosophers(t_rules *data)
 	if (pthread_mutex_init(&data->philo->message_out, NULL))
 		error_manager(3, data);
 	if (pthread_mutex_init(&data->philo->eating, NULL))
+		error_manager(3, data);
+	if (pthread_mutex_init(&data->philo->sleeping, NULL))
 		error_manager(3, data);
 	while (i <= data->n_philo)
 	{

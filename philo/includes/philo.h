@@ -33,6 +33,7 @@ struct s_philo
 	// struct s_rules	*rules;
 	pthread_mutex_t	message_out;
 	pthread_mutex_t	eating;
+	pthread_mutex_t	sleeping;
 	t_time			start;
 };
 
@@ -58,6 +59,7 @@ void	*lifecycle(void *arg);
 int		philo_is_dead(t_philo *philo);
 void	taking_fork(t_philo *philo);
 void	eating(t_philo *philo);
+void	sleeping(t_philo *philo);
 
 /* utils */
 int		ft_atoi(char *str);

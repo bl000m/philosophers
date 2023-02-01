@@ -25,6 +25,7 @@ void	free_all(t_rules *data)
 	}
 	pthread_mutex_destroy(&data->philo->message_out);
 	pthread_mutex_destroy(&data->philo->eating);
-	free(data);
+	pthread_mutex_destroy(&data->philo->sleeping);
 	free(data->philo);
+	free(data);
 }

@@ -59,5 +59,8 @@ void	message(t_philo *philo, char flag)
 	else if (flag == 'e')
 		printf("%llu: philo n.%d is eating\n",
 			timestamp_delta(philo), philo->n);
+	else if (flag == 's')
+		printf("%llu: philo n.%d is sleeping\n",
+			timestamp_delta(philo), philo->n);
 	pthread_mutex_unlock(&philo->message_out);
 }

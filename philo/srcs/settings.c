@@ -21,10 +21,10 @@ t_rules	*init_data(int argc, char *argv[])
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
-	data->philo->start = timestamp();
+	
 	if (argc == 6)
 		data->n_meals = ft_atoi(argv[5]);
-	data->philo = malloc(sizeof(t_philo) * data->n_philo);
+	data->philo = malloc(sizeof(t_philo) * (data->n_philo + 1));
 	if (!(data->philo))
 		error_manager(2, data);
 	// else if (argc == 5)
