@@ -30,7 +30,7 @@ struct s_philo
 	pthread_mutex_t	fork_left;
 	pthread_mutex_t	fork_right;
 	int				is_dead;
-	// struct s_rules	*rules;
+	struct s_rules	*rules;
 	pthread_mutex_t	message_out;
 	pthread_mutex_t	eating;
 	pthread_mutex_t	sleeping;
