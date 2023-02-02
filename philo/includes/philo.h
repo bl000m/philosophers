@@ -15,6 +15,7 @@
 
 /* libraries */
 # include <stdio.h> // printf
+# include <unistd.h> // usleep
 # include <stdlib.h> //exit
 # include <pthread.h> // creating threads
 #include <sys/time.h> // timestamp
@@ -35,6 +36,8 @@ struct s_philo
 	pthread_mutex_t	eating;
 	pthread_mutex_t	sleeping;
 	t_time			start;
+	t_time			last_meal;
+	int				meal_count;
 };
 
 struct s_rules
@@ -60,12 +63,14 @@ int		philo_is_dead(t_philo *philo);
 void	taking_fork(t_philo *philo);
 void	eating(t_philo *philo);
 void	sleeping(t_philo *philo);
+void	thinking(t_philo *philo);
 
 /* utils */
 int		ft_atoi(char *str);
 t_time	timestamp(void);
 t_time	timestamp_delta(t_philo *philo);
 void	message(t_philo *philo, char flag);
+void	time_activity(t_time millisec);
 
 /* error management */
 void	check_error(int argc, char *argv[]);
