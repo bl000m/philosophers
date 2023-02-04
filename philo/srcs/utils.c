@@ -65,6 +65,9 @@ void	message(t_philo *philo, char flag)
 	else if (flag == 't')
 		printf("%09llu: philo n.%d is thinking\n",
 			timestamp_delta(philo), philo->n);
+	else if (flag == 'd')
+		printf("%09llu: philo n.%d died\n",
+			timestamp_delta(philo), philo->n);
 	pthread_mutex_unlock(&philo->message_out);
 }
 

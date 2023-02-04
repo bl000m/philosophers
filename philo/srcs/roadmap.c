@@ -39,9 +39,9 @@ void	creating_philosophers(t_rules *data)
 		data->philo[i].rules = data;
 		data->philo[i].n = i;
 		data->philo[i].is_dead = 0;
-		data->philo[i].last_meal = 0;
 		data->philo[i].meal_count = 0;
 		data->philo[i].start = timestamp();
+		data->philo[i].last_meal = data->philo[i].start;
 		pthread_mutex_init(&data->philo[i].fork_left, NULL);
 		if (data->n_philo > 1)
 			pthread_mutex_init(&data->philo[i].fork_right, NULL);
@@ -64,6 +64,8 @@ void	*lifecycle(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	// if (philo->rules->n_philo % 2 == 0)
+	// 	time_activity(philo->rules->time_to_eat / 10);
 	while (!philo->is_dead)
 	{
 		taking_fork(philo);
@@ -98,6 +100,8 @@ void	taking_fork(t_philo *philo)
 
 void	eating(t_philo *philo)
 {
+	// if ((int)(timestamp() - philo->last_meal) > philo->rules->time_to_die)
+	// 	philo->is_dead = 1;
 	pthread_mutex_lock(&philo->eating);
 	philo->last_meal = timestamp();
 	philo->meal_count += 1;
