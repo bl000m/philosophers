@@ -29,7 +29,7 @@ void	check_error(int argc, char *argv[])
 void	error_manager(int	error, t_rules *data)
 {
 	if (error == 2)
-		perror("error allocating memory for the life of a philosopher");
+		perror("error allocating memory");
 	if (error == 3)
 		perror("error initializing the message_out feature");
 	if (error == 4)

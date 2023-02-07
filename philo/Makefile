@@ -18,8 +18,8 @@ SRCS	= roadmap.c error_management.c settings.c utils.c memory.c
 OBJS	= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # compile
-CC 			= cc -fsanitize=address -g3 #-ggdb3
-CFLAGS 		= -Wall -Werror -Wextra #-pthread
+CC 			= cc -pthread -ggdb3 #-fsanitize=address -g3 #-ggdb3
+CFLAGS 		= -Wall -Werror -Wextra
 
 # directories
 SRCS_DIR	= ./srcs

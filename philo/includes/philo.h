@@ -18,7 +18,7 @@
 # include <unistd.h> // usleep
 # include <stdlib.h> //exit
 # include <pthread.h> // creating threads
-#include <sys/time.h> // timestamp
+# include <sys/time.h> // timestamp
 
 typedef unsigned long long int	t_time;
 typedef struct s_rules			t_rules;
@@ -28,8 +28,8 @@ struct s_philo
 {
 	pthread_t		life;
 	int				n;
-	pthread_mutex_t	fork_left;
-	pthread_mutex_t	fork_right;
+	// pthread_mutex_t	fork_left;
+	// pthread_mutex_t	fork_right;
 	int				is_dead;
 	struct s_rules	*rules;
 	pthread_mutex_t	message_out;
@@ -47,6 +47,7 @@ struct s_rules
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				n_meals;
+	pthread_mutex_t	*forks;
 	t_philo			*philo;
 
 };
@@ -55,9 +56,12 @@ struct s_rules
 
 /* settings */
 t_rules	*init_data(int argc, char *argv[]);
+void	init_philo(t_philo *philo, t_rules *data, int i);
 
 /* philosophers lifecycle */
 void	creating_philosophers(t_rules *data);
+void	create_life(t_philo *philo, t_rules *data);
+void	waiting_life_finished(pthread_t life, t_rules *data);
 void	*lifecycle(void *arg);
 int		philo_is_dead(t_philo *philo);
 void	taking_fork(t_philo *philo);
