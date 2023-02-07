@@ -114,7 +114,7 @@ void	taking_fork(t_philo *philo)
 		time_activity(philo->rules->time_to_die * 2);
 		return ;
 	}
-	pthread_mutex_lock(&philo->rules->forks[philo->n - 1]);
+	pthread_mutex_lock(&philo->rules->forks[philo->n + 1]);
 	message(philo, 'f');
 }
 
@@ -125,7 +125,7 @@ void	eating(t_philo *philo)
 	philo->meal_count += 1;
 	time_activity(philo->rules->time_to_eat);
 	philo->last_meal = timestamp();
-	pthread_mutex_unlock(&philo->rules->forks[philo->n - 1]);
+	pthread_mutex_unlock(&philo->rules->forks[philo->n + 1]);
 	pthread_mutex_unlock(&philo->rules->forks[philo->n]);
 	pthread_mutex_unlock(&philo->eating);
 }

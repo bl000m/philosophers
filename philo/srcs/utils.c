@@ -54,16 +54,16 @@ void	message(t_philo *philo, char flag)
 {
 	pthread_mutex_lock(&philo->message_out);
 	if (flag == 'f')
-		printf("%llu: philo n.%d has taken a fork\n",
+		printf("ms...%05llu: philo n.%d has taken a fork\n",
 			timestamp_delta(philo), philo->n);
 	else if (flag == 'e')
-		printf("%llu: philo n.%d is eating\n",
-			timestamp_delta(philo), philo->n);
+		printf("%sms...%05llu: philo n.%d is eating%s\n", GREEN,
+			timestamp_delta(philo), philo->n, NORMAL);	
 	else if (flag == 's')
-		printf("%llu: philo n.%d is sleeping\n",
+		printf("ms...%05llu: philo n.%d is sleeping\n",
 			timestamp_delta(philo), philo->n);
 	else if (flag == 't')
-		printf("%llu: philo n.%d is thinking\n",
+		printf("ms...%05llu: philo n.%d is thinking\n",
 			timestamp_delta(philo), philo->n);
 	else if (flag == 'd')
 		printf("%llu: philo n.%d died\n",
