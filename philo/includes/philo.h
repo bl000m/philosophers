@@ -50,6 +50,7 @@ struct s_rules
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				n_meals;
+	int				eaten_enough;
 	pthread_mutex_t	*forks;
 	t_philo			*philo;
 
