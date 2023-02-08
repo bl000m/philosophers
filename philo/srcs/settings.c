@@ -34,8 +34,8 @@ t_rules	*init_data(int argc, char *argv[])
 		error_manager(3, data);
 	if (pthread_mutex_init(&data->philo->eating, NULL))
 		error_manager(3, data);
-	if (pthread_mutex_init(&data->philo->sleeping, NULL))
-		error_manager(3, data);
+	// if (pthread_mutex_init(&data->philo->sleeping, NULL))
+	// 	error_manager(3, data);
 	return (data);
 }
 

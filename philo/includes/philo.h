@@ -37,7 +37,7 @@ struct s_philo
 	struct s_rules	*rules;
 	pthread_mutex_t	message_out;
 	pthread_mutex_t	eating;
-	pthread_mutex_t	sleeping;
+	// pthread_mutex_t	sleeping;
 	t_time			start;
 	t_time			last_meal;
 	int				meal_count;
