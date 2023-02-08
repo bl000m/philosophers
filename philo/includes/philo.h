@@ -33,8 +33,6 @@ struct s_philo
 	struct s_rules	*rules;
 	pthread_t		life;
 	int				n;
-	pthread_mutex_t	message_out;
-	pthread_mutex_t	eating;
 	// pthread_mutex_t	sleeping;
 	t_time			start;
 	t_time			last_meal;
@@ -49,6 +47,8 @@ struct s_rules
 	int				time_to_sleep;
 	int				n_meals;
 	int				eaten_enough;
+	pthread_mutex_t	message_out;
+	pthread_mutex_t	eating;
 	pthread_mutex_t	*forks;
 	t_philo			*philo;
 

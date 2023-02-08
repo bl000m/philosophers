@@ -20,11 +20,11 @@ void	free_all(t_rules *data)
 	while (i < data->n_philo)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
-		free(&data->philo[i]);
+		// free(&data->philo[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&data->philo->message_out);
-	pthread_mutex_destroy(&data->philo->eating);
+	pthread_mutex_destroy(&data->message_out);
+	pthread_mutex_destroy(&data->eating);
 	// pthread_mutex_destroy(&data->philo->sleeping);
 	free(data->philo);
 	free(data->forks);

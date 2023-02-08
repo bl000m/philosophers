@@ -31,10 +31,10 @@ t_rules	*init_data(int argc, char *argv[])
 	data->forks = malloc(sizeof(pthread_mutex_t) * (data->n_philo));
 	if (!(data->forks))
 		error_manager(2, data);
-	if (pthread_mutex_init(&data->philo->message_out, NULL))
-		error_manager(3, data);
-	if (pthread_mutex_init(&data->philo->eating, NULL))
-		error_manager(3, data);
+	pthread_mutex_init(&data->message_out, NULL);
+		// error_manager(3, data);
+	pthread_mutex_init(&data->eating, NULL);
+		// error_manager(3, data);
 	// if (pthread_mutex_init(&data->philo->sleeping, NULL))
 	// 	error_manager(3, data);
 	return (data);

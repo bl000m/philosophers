@@ -65,8 +65,9 @@ void	*lifecycle(void *arg)
 		if ((timestamp() - philo->last_meal) > (t_time)philo->rules->time_to_die)
 		{
 			message(philo, 'd');
-			free_all(philo->rules);
-			exit(0);
+			break ;
+			// free_all(philo->rules);
+			// exit(0);
 		}
 		taking_fork(philo);
 		eating(philo);
@@ -76,8 +77,9 @@ void	*lifecycle(void *arg)
 		{
 			if (philo->rules->eaten_enough == philo->rules->n_philo)
 			{
-				free_all(philo->rules);
-				exit(0);
+				break ;
+				// free_all(philo->rules);
+				// exit(0);
 			}
 		}
 	}
@@ -103,7 +105,7 @@ void	eating(t_philo *philo)
 {
 	if (philo->rules->n_philo != 1)
 	{
-		pthread_mutex_lock(&philo->eating);
+		pthread_mutex_lock(&philo->rules->eating);
 		message(philo, 'e');
 		philo->meal_count += 1;
 		if (philo->rules->n_meals != -1)
@@ -114,9 +116,10 @@ void	eating(t_philo *philo)
 		}
 		philo->last_meal = timestamp();
 		time_activity(philo->rules->time_to_eat);
-		pthread_mutex_unlock(&philo->rules->forks[philo->n + 1]);
+		if (philo->rules->n_philo != 1 && philo->rules->n_philo % 2 == 0)
+			pthread_mutex_unlock(&philo->rules->forks[philo->n + 1]);
 		pthread_mutex_unlock(&philo->rules->forks[philo->n]);
-		pthread_mutex_unlock(&philo->eating);
+		pthread_mutex_unlock(&philo->rules->eating);
 	}
 	else
 	{
