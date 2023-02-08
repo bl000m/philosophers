@@ -21,6 +21,7 @@
 # include <sys/time.h> // timestamp
 
 #define GREEN "\x1b[32m"
+#define RED "\x1b[41m"
 #define NORMAL "\x1b[m"
 
 typedef unsigned long long int	t_time;
