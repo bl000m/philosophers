@@ -29,7 +29,7 @@ t_rules	*init_data(int argc, char *argv[])
 	if (!(data->philo))
 		error_manager(2, data);
 	data->forks = malloc(sizeof(pthread_mutex_t) * (data->n_philo));
-	if (!(data->philo))
+	if (!(data->forks))
 		error_manager(2, data);
 	if (pthread_mutex_init(&data->philo->message_out, NULL))
 		error_manager(3, data);
@@ -43,9 +43,9 @@ t_rules	*init_data(int argc, char *argv[])
 void	init_philo(t_philo *philo, t_rules *data, int i)
 {
 	philo->rules = data;
+	philo->life = 0;
 	philo->n = i;
-	philo->is_dead = 0;
-	philo->meal_count = 0;
 	philo->start = timestamp();
 	philo->last_meal = philo->start;
+	philo->meal_count = 0;
 }
