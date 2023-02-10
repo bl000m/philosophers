@@ -53,21 +53,24 @@ t_time	timestamp_delta(t_philo *philo)
 void	message(t_philo *philo, char flag)
 {
 	pthread_mutex_lock(&philo->rules->message_out);
-	if (flag == 'f')
-		printf("%05llu: philo n.%d has taken a fork\n",
-			timestamp_delta(philo), philo->n + 1);
-	else if (flag == 'e')
-		printf("%s%05llu: philo n.%d is eating%s\n", GREEN,
-			timestamp_delta(philo), philo->n + 1, NORMAL);	
-	else if (flag == 's')
-		printf("%05llu: philo n.%d is sleeping\n",
-			timestamp_delta(philo), philo->n + 1);
-	else if (flag == 't')
-		printf("%05llu: philo n.%d is thinking\n",
-			timestamp_delta(philo), philo->n + 1);
-	else if (flag == 'd')
-		printf("%s%05llu: philo n.%d died%s\n", RED,
-			timestamp_delta(philo), philo->n + 1, NORMAL);
+	if (!philo->rules->someone_is_dead)
+	{
+		if (flag == 'f')
+			printf("%05llu: philo n.%d has taken a fork\n",
+				timestamp_delta(philo), philo->n + 1);
+		else if (flag == 'e')
+			printf("%s%05llu: philo n.%d is eating%s\n", GREEN,
+				timestamp_delta(philo), philo->n + 1, NORMAL);	
+		else if (flag == 's')
+			printf("%05llu: philo n.%d is sleeping\n",
+				timestamp_delta(philo), philo->n + 1);
+		else if (flag == 't')
+			printf("%05llu: philo n.%d is thinking\n",
+				timestamp_delta(philo), philo->n + 1);
+		else if (flag == 'd')
+			printf("%s%05llu: philo n.%d died%s\n", RED,
+				timestamp_delta(philo), philo->n + 1, NORMAL);
+	}
 	pthread_mutex_unlock(&philo->rules->message_out);
 }
 

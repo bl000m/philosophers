@@ -23,6 +23,7 @@ t_rules	*init_data(int argc, char *argv[])
 	data->time_to_sleep = ft_atoi(argv[4]);
 	data->n_meals = -1;
 	data->eaten_enough = 0;
+	data->someone_is_dead = 0;
 	if (argc == 6)
 		data->n_meals = ft_atoi(argv[5]);
 	data->philo = malloc(sizeof(t_philo) * (data->n_philo));
@@ -32,11 +33,9 @@ t_rules	*init_data(int argc, char *argv[])
 	if (!(data->forks))
 		error_manager(2, data);
 	pthread_mutex_init(&data->message_out, NULL);
-		// error_manager(3, data);
 	pthread_mutex_init(&data->eating, NULL);
-		// error_manager(3, data);
-	// if (pthread_mutex_init(&data->philo->sleeping, NULL))
-	// 	error_manager(3, data);
+	pthread_mutex_init(&data->dying, NULL);
+	pthread_mutex_init(&data->stop, NULL);
 	return (data);
 }
 

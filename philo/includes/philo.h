@@ -33,7 +33,6 @@ struct s_philo
 	struct s_rules	*rules;
 	pthread_t		life;
 	int				n;
-	// pthread_mutex_t	sleeping;
 	t_time			start;
 	t_time			last_meal;
 	int				meal_count;
@@ -47,8 +46,11 @@ struct s_rules
 	int				time_to_sleep;
 	int				n_meals;
 	int				eaten_enough;
+	int				someone_is_dead;
 	pthread_mutex_t	message_out;
 	pthread_mutex_t	eating;
+	pthread_mutex_t	dying;
+	pthread_mutex_t	stop;
 	pthread_mutex_t	*forks;
 	t_philo			*philo;
 
@@ -68,6 +70,8 @@ void	taking_fork(t_philo *philo);
 void	eating(t_philo *philo);
 void	sleeping(t_philo *philo);
 void	thinking(t_philo *philo);
+int		check_death(t_philo *philo);
+int	check_enough(t_philo *philo);
 
 /* utils */
 int		ft_atoi(char *str);
