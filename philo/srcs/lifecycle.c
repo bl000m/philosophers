@@ -19,15 +19,29 @@ void	*lifecycle(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->n % 2 == 0)
 		time_activity(philo->rules->time_to_eat, philo);
-	while (!check_death(philo))
+	if (philo->rules->n_meals != -1)
 	{
-		if (check_death(philo)
-			|| (philo->rules->n_meals != -1 && check_enough(philo)))
-			break ;
-		taking_fork(philo);
-		eating(philo);
-		sleeping(philo);
-		thinking(philo);
+		while (!check_death(philo) && !check_enough(philo))
+		{
+			// if (check_death(philo))
+			// 	break ;
+			taking_fork(philo);
+			eating(philo);
+			sleeping(philo);
+			thinking(philo);
+		}
+	}
+	else
+	{
+		while (!check_death(philo))
+		{
+			// if (check_death(philo))
+			// 	break ;
+			taking_fork(philo);
+			eating(philo);
+			sleeping(philo);
+			thinking(philo);
+		}
 	}
 	return (NULL);
 }
@@ -50,6 +64,17 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->rules->eating);
 	message(philo, 'e');
 	philo->meal_count += 1;
+	if (philo->rules->n_meals != -1)
+	{
+		printf("WTFFFFFF\n");
+		if (check_enough(philo))
+		{
+			pthread_mutex_lock(&philo->rules->protecting_enough);
+			philo->rules->eaten_enough = 1;
+			printf("WTF eaten_enough = %d\n", philo->rules->eaten_enough);
+			pthread_mutex_unlock(&philo->rules->protecting_enough);
+		}
+	}
 	philo->last_meal = timestamp();
 	time_activity(philo->rules->time_to_eat, philo);
 	if (philo->rules->n_philo != 1)

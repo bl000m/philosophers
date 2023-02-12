@@ -27,6 +27,7 @@ t_time	timestamp_delta(t_philo *philo)
 
 void	message(t_philo *philo, char flag)
 {
+	// pthread_mutex_lock(&philo->rules->protecting_enough);
 	pthread_mutex_lock(&philo->rules->dying);
 	pthread_mutex_lock(&philo->rules->message_out);
 	if (!philo->rules->someone_is_dead)
@@ -47,6 +48,7 @@ void	message(t_philo *philo, char flag)
 			printf("%s%05llu: philo n.%d died%s\n", RED,
 				timestamp_delta(philo), philo->n + 1, NORMAL);
 	}
+	// pthread_mutex_unlock(&philo->rules->protecting_enough);
 	pthread_mutex_unlock(&philo->rules->message_out);
 	pthread_mutex_unlock(&philo->rules->dying);
 }

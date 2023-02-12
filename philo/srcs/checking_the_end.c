@@ -43,17 +43,24 @@ int	check_enough(t_philo *philo)
 	while (i++ < philo->rules->n_philo)
 	{
 		count_meals(philo, &meals_count);
+		printf("count meals = %d\n", meals_count);
 		if (meals_count >= philo->rules->n_meals)
 		{
-			if (philo->n != 0)
+			// printf("WTF philo->n = %d\n", philo->n);
+			if (philo->rules->n_philo != 1)
 			{
+				printf("done = %d\n", done);
 				if (++done == philo->rules->n_philo - 1)
+				{
 					return (1);
+				}
 			}
 			else
 			{
 				if (++done == philo->rules->n_philo)
+				{
 					return (1);
+				}
 			}
 		}
 		usleep(50);

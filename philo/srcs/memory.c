@@ -21,6 +21,7 @@ void	free_all(t_rules *data)
 		pthread_mutex_destroy(&data->forks[i++]);
 	pthread_mutex_destroy(&data->message_out);
 	pthread_mutex_destroy(&data->dealing_with_forks);
+	pthread_mutex_destroy(&data->protecting_enough);
 	pthread_mutex_destroy(&data->eating);
 	pthread_mutex_destroy(&data->dying);
 	pthread_mutex_destroy(&data->stop);

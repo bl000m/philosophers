@@ -49,6 +49,7 @@ struct s_rules
 	int				someone_is_dead;
 	pthread_mutex_t	message_out;
 	pthread_mutex_t	dealing_with_forks;
+	pthread_mutex_t	protecting_enough;
 	pthread_mutex_t	eating;
 	pthread_mutex_t	dying;
 	pthread_mutex_t	stop;

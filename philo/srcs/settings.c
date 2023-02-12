@@ -34,6 +34,7 @@ t_rules	*init_data(int argc, char *argv[])
 		error_manager(2, data);
 	pthread_mutex_init(&data->message_out, NULL);
 	pthread_mutex_init(&data->dealing_with_forks, NULL);
+	pthread_mutex_init(&data->protecting_enough, NULL);
 	pthread_mutex_init(&data->eating, NULL);
 	pthread_mutex_init(&data->dying, NULL);
 	pthread_mutex_init(&data->stop, NULL);
