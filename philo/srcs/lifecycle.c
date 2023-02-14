@@ -17,8 +17,8 @@ void	*lifecycle(void *arg)
 	t_philo		*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->n % 2 == 0 && philo->rules->n_philo != 1)
-		time_activity(philo->rules->time_to_eat, philo);
+	// if (philo->n % 2 == 0 && philo->rules->n_philo != 1)
+	// 	time_activity(philo->rules->time_to_eat, philo);
 	if (philo->rules->n_philo == 1)
 	{
 		taking_fork(philo);
