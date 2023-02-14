@@ -17,22 +17,35 @@ void	*lifecycle(void *arg)
 	t_philo		*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->n % 2 == 0)
+	if (philo->n % 2 == 0 && philo->rules->n_philo != 1)
 		time_activity(philo->rules->time_to_eat, philo);
-	if (philo->rules->n_meals != -1)
+	if (philo->rules->n_philo == 1)
 	{
-		while (!check_death(philo) && !check_enough(philo))
-		{
-			printf("delta philo %d= %ld\n", philo->n + 1, (long)(timestamp() - philo->last_meal));
-			activities(philo);
-		}
+		taking_fork(philo);
+		time_activity((philo->rules->time_to_die - timestamp()), philo);
+		pthread_mutex_unlock(&philo->rules->forks[philo->n]);
+		message(philo, 'd');
+		philo->rules->someone_is_dead = 1;
 	}
 	else
 	{
-		while (!check_death(philo))
+		if (philo->rules->n_meals != -1)
 		{
-			printf("delta philo %d= %ld\n", philo->n + 1, (long)(timestamp() - philo->last_meal));
-			activities(philo);
+			while (!check_death(philo) && !check_enough(philo))
+			{
+				activities(philo);
+				time_activity((philo->rules->time_to_die - timestamp()), philo);
+				check_death(philo);
+			}
+		}
+		else
+		{
+			while (!check_death(philo))
+			{
+				activities(philo);
+				time_activity((philo->rules->time_to_die - timestamp()), philo);
+				check_death(philo);
+			}
 		}
 	}
 	return (NULL);

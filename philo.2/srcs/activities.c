@@ -14,6 +14,15 @@
 
 void	activities(t_philo *philo)
 {
+	if ((timestamp() - philo->rules->start) >= (t_time)philo->rules->time_to_die)
+	{
+		message(philo, 'd');
+		pthread_mutex_lock(&philo->rules->dying);
+		philo->rules->someone_is_dead = 1;
+		pthread_mutex_unlock(&philo->rules->dying);
+	}
+	printf("delta philo %d = %ld\n", (philo->n = 1), (long)(timestamp() - philo->rules->start));
+	pthread_mutex_lock(&philo->rules->eating);
 	taking_fork(philo);
 	eating(philo);
 	sleeping(philo);
@@ -35,7 +44,6 @@ void	taking_fork(t_philo *philo)
 
 void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->rules->eating);
 	message(philo, 'e');
 	pthread_mutex_lock(&philo->rules->counting);
 	philo->meal_count += 1;

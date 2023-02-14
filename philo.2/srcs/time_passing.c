@@ -33,19 +33,19 @@ void	message(t_philo *philo, char flag)
 	if (!philo->rules->someone_is_dead && !philo->rules->eaten_enough)
 	{
 		if (flag == 'f')
-			printf("%05llu: philo n.%d has taken a fork\n",
+			printf("%05llu %d has taken a fork\n",
 				timestamp_delta(philo), philo->n + 1);
 		else if (flag == 'e')
-			printf("%s%05llu: philo n.%d is eating%s\n", GREEN,
+			printf("%s%05llu %d is eating%s\n", GREEN,
 				timestamp_delta(philo), philo->n + 1, NORMAL);
 		else if (flag == 's')
-			printf("%05llu: philo n.%d is sleeping\n",
+			printf("%05llu %d is sleeping\n",
 				timestamp_delta(philo), philo->n + 1);
 		else if (flag == 't')
-			printf("%05llu: philo n.%d is thinking\n",
+			printf("%05llu %d is thinking\n",
 				timestamp_delta(philo), philo->n + 1);
 		else if (flag == 'd')
-			printf("%s%05llu: philo n.%d died%s\n", RED,
+			printf("%s%05llu %d died%s\n", RED,
 				timestamp_delta(philo), philo->n + 1, NORMAL);
 	}
 	pthread_mutex_unlock(&philo->rules->message_out);
