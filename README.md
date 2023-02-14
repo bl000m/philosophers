@@ -1,8 +1,6 @@
 # philosophers
 **Threads and philosophers. 42 School project.**
 
-=> If you are a 42 student visiting this page for inspiration, please enjoy looking for the logic between the lines and playing with it.
-
 This project is a training to multi-threads/multi-process programming with the use of mutex, in the form of a variant of the famous Dining Philosophers problem.
 
 # mandatory part
