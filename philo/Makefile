@@ -19,7 +19,7 @@ SRCS	= main.c error_management.c settings.c utils.c memory.c lifecycle.c \
 OBJS	= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # compile
-CC 			= cc #-fsanitize=thread
+CC 			= cc
 CFLAGS 		= -Wall -Werror -Wextra
 
 # directories

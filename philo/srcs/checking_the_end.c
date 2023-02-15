@@ -14,15 +14,14 @@
 
 int	check_death(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->rules->dying);
 	if ((timestamp() - philo->last_meal) > (t_time)philo->rules->time_to_die)
 	{
-		pthread_mutex_unlock(&philo->rules->dying);
 		message(philo, 'd');
+		pthread_mutex_lock(&philo->rules->dying);
 		philo->rules->someone_is_dead = 1;
+		pthread_mutex_unlock(&philo->rules->dying);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->rules->dying);
 	return (0);
 }
 
