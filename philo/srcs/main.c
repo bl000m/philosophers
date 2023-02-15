@@ -27,8 +27,9 @@ int	main(int argc, char *argv[])
 void	creating_philosophers(t_rules *data)
 {
 	int	i;
-	pthread_mutex_lock(&data->time);
+
 	i = 0;
+	pthread_mutex_lock(&data->time);
 	data->start = timestamp();
 	while (i < data->n_philo)
 	{

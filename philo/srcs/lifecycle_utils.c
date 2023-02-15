@@ -31,7 +31,6 @@ void	multiple_philos_scenario(t_philo *philo)
 		else
 			lock_order(philo, &philo->rules->forks[0],
 				&philo->rules->forks[philo->n]);
-		philo->stop_waiting = 1;
 	}
 	else if (philo->n != philo->rules->n_philo - 1 && !check_death(philo))
 	{
@@ -42,6 +41,16 @@ void	multiple_philos_scenario(t_philo *philo)
 		else
 			lock_order(philo, &philo->rules->forks[philo->n + 1],
 				&philo->rules->forks[philo->n]);
-		philo->stop_waiting = 1;
+	}
+}
+
+void	just_one_scenario(t_philo *philo)
+{
+	if (philo->rules->n_philo == 1)
+	{
+		message(philo, 'f');
+		time_activity((philo->rules->time_to_die - timestamp()), philo);
+		message(philo, 'd');
+		philo->rules->someone_is_dead = 1;
 	}
 }

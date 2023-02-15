@@ -32,7 +32,6 @@ struct s_philo
 	pthread_t		life;
 	int				n;
 	int				meal_count;
-	int				stop_waiting;
 	t_time			last_meal;
 	t_rules			*rules;
 };
@@ -69,7 +68,8 @@ void	init_mutex(t_rules *data);
 void	creating_philosophers(t_rules *data);
 void	create_life(t_philo *philo, t_rules *data);
 void	*lifecycle(void *arg);
-void		activities(t_philo *philo);
+void	just_one_scenario(t_philo *philo);
+void	activities(t_philo *philo);
 void	taking_fork(t_philo *philo);
 void	eating(t_philo *philo);
 void	sleeping(t_philo *philo);

@@ -53,10 +53,8 @@ void	init_philo(t_philo *philo, t_rules *data, int i)
 	philo->rules = data;
 	philo->life = 0;
 	philo->n = i;
-	philo->stop_waiting = 0;
 	pthread_mutex_lock(&philo->rules->counting);
 	philo->meal_count = 0;
 	pthread_mutex_unlock(&philo->rules->counting);
-	// philo->start = timestamp();
 	philo->last_meal = data->start;
 }

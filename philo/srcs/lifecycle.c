@@ -23,27 +23,10 @@ void	*lifecycle(void *arg)
 	if (philo->n % 2 == 0 && philo->rules->n_philo != 1)
 		time_activity(philo->rules->time_to_eat, philo);
 	check_death(philo);
-	if (philo->rules->n_philo == 1)
-	{
-		// pthread_mutex_lock(&philo->rules->forks[philo->n]);
-		message(philo, 'f');
-		time_activity((philo->rules->time_to_die - timestamp()), philo);
-		// pthread_mutex_unlock(&philo->rules->forks[philo->n]);
-		message(philo, 'd');
-		philo->rules->someone_is_dead = 1;
-	}
-	// else
-	// {
-		if (philo->rules->n_meals != -1)
-		{
-			while (!check_death(philo) && !check_enough(philo))
-				activities(philo);
-		}
-		else
-		{
-			while (!check_death(philo))
-				activities(philo);
-		}
-	// }
+	just_one_scenario(philo);
+	while ((philo->rules->n_meals != -1 && !check_death(philo)
+			&& !check_enough(philo)) || (philo->rules->n_meals == -1
+			&& !check_death(philo)))
+		activities(philo);
 	return (NULL);
 }

@@ -35,8 +35,6 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->rules->counting);
 	philo->meal_count += 1;
 	pthread_mutex_unlock(&philo->rules->counting);
-	pthread_mutex_unlock(&philo->rules->eating);
-	time_activity(philo->rules->time_to_eat, philo);
 	if (philo->rules->n_meals != -1)
 	{
 		if (check_enough(philo))
@@ -51,20 +49,25 @@ void	eating(t_philo *philo)
 	else
 		pthread_mutex_unlock(&philo->rules->forks[philo->n + 1]);
 	pthread_mutex_unlock(&philo->rules->forks[philo->n]);
+	pthread_mutex_unlock(&philo->rules->eating);
+	time_activity(philo->rules->time_to_eat, philo);
 }
 
 void	sleeping(t_philo *philo)
 {
 	message(philo, 's');
 	time_activity(philo->rules->time_to_sleep, philo);
-	philo->stop_waiting = 0;
 }
 
 void	thinking(t_philo *philo)
 {
 	message(philo, 't');
-	if ((philo->rules->n_philo % 2 != 0) && (philo->rules->time_to_eat > philo->rules->time_to_sleep))
-		time_activity((1 + philo->rules->time_to_eat + philo->rules->time_to_sleep), philo);
-	else if ((philo->rules->n_philo % 2 == 0) && (philo->rules->time_to_eat > philo->rules->time_to_sleep))
-		time_activity((1 + philo->rules->time_to_eat - philo->rules->time_to_sleep), philo);
+	if ((philo->rules->n_philo % 2 != 0)
+		&& (philo->rules->time_to_eat > philo->rules->time_to_sleep))
+		time_activity((1 + philo->rules->time_to_eat
+				+ philo->rules->time_to_sleep), philo);
+	else if ((philo->rules->n_philo % 2 == 0)
+		&& (philo->rules->time_to_eat > philo->rules->time_to_sleep))
+		time_activity((1 + philo->rules->time_to_eat
+				- philo->rules->time_to_sleep), philo);
 }
