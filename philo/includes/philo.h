@@ -32,6 +32,7 @@ struct s_philo
 	pthread_t		life;
 	int				n;
 	int				meal_count;
+	int				stop_waiting;
 	t_time			last_meal;
 	t_rules			*rules;
 };
@@ -52,6 +53,7 @@ struct s_rules
 	pthread_mutex_t	checking_done;
 	pthread_mutex_t	eating;
 	pthread_mutex_t	counting;
+	pthread_mutex_t	time;
 	pthread_mutex_t	dying;
 	pthread_mutex_t	*forks;
 	t_philo			*philo;
@@ -67,7 +69,7 @@ void	init_mutex(t_rules *data);
 void	creating_philosophers(t_rules *data);
 void	create_life(t_philo *philo, t_rules *data);
 void	*lifecycle(void *arg);
-void	activities(t_philo *philo);
+void		activities(t_philo *philo);
 void	taking_fork(t_philo *philo);
 void	eating(t_philo *philo);
 void	sleeping(t_philo *philo);

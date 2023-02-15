@@ -57,6 +57,7 @@ void	time_activity(t_time millisec, t_philo *philo)
 {
 	t_time	start;
 
+	(void) philo;
 	start = timestamp();
 	while (timestamp() - start < millisec && !check_death(philo))
 		usleep(100);

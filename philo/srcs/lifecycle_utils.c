@@ -23,7 +23,7 @@ void	lock_order(t_philo *philo, pthread_mutex_t *left_fork,
 
 void	multiple_philos_scenario(t_philo *philo)
 {
-	if (philo->n == philo->rules->n_philo - 1)
+	if (philo->n == philo->rules->n_philo - 1 && !check_death(philo))
 	{
 		if (&philo->rules->forks[philo->n] < &philo->rules->forks[0])
 			lock_order(philo, &philo->rules->forks[philo->n],
@@ -31,8 +31,9 @@ void	multiple_philos_scenario(t_philo *philo)
 		else
 			lock_order(philo, &philo->rules->forks[0],
 				&philo->rules->forks[philo->n]);
+		philo->stop_waiting = 1;
 	}
-	else
+	else if (philo->n != philo->rules->n_philo - 1 && !check_death(philo))
 	{
 		if (&philo->rules->forks[philo->n]
 			< &philo->rules->forks[philo->n + 1])
@@ -41,5 +42,6 @@ void	multiple_philos_scenario(t_philo *philo)
 		else
 			lock_order(philo, &philo->rules->forks[philo->n + 1],
 				&philo->rules->forks[philo->n]);
+		philo->stop_waiting = 1;
 	}
 }

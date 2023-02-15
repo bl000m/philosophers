@@ -19,7 +19,7 @@ SRCS	= main.c error_management.c settings.c utils.c memory.c lifecycle.c \
 OBJS	= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # compile
-CC 			= cc -pthread
+CC 			= cc
 CFLAGS 		= -Wall -Werror -Wextra
 
 # directories
@@ -36,7 +36,7 @@ obj:
 	mkdir -p $(OBJDIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -lm -o $(NAME)
+	$(CC) $(OBJS) -lm -o $(NAME) -pthread
 
 $(OBJDIR)/%.o: $(SRCS_DIR)/%.c Makefile $(INCS_DIR)/philo.h
 	$(CC) $(CFLAGS) -I $(INCS_DIR) -c $< -o $@

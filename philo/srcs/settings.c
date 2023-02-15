@@ -43,6 +43,7 @@ void	init_mutex(t_rules *data)
 	pthread_mutex_init(&data->protecting_enough, NULL);
 	pthread_mutex_init(&data->eating, NULL);
 	pthread_mutex_init(&data->dying, NULL);
+	pthread_mutex_init(&data->time, NULL);
 	pthread_mutex_init(&data->counting, NULL);
 	pthread_mutex_init(&data->checking_done, NULL);
 }
@@ -52,6 +53,7 @@ void	init_philo(t_philo *philo, t_rules *data, int i)
 	philo->rules = data;
 	philo->life = 0;
 	philo->n = i;
+	philo->stop_waiting = 0;
 	pthread_mutex_lock(&philo->rules->counting);
 	philo->meal_count = 0;
 	pthread_mutex_unlock(&philo->rules->counting);

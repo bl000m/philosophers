@@ -17,8 +17,12 @@ void	*lifecycle(void *arg)
 	t_philo		*philo;
 
 	philo = (t_philo *)arg;
-	// if (philo->n % 2 == 0 && philo->rules->n_philo != 1)
-	// 	time_activity(philo->rules->time_to_eat, philo);
+	pthread_mutex_lock(&philo->rules->time);
+	pthread_mutex_unlock(&philo->rules->time);
+	philo->last_meal = philo->rules->start;
+	if (philo->n % 2 == 0 && philo->rules->n_philo != 1)
+		time_activity(philo->rules->time_to_eat, philo);
+	check_death(philo);
 	if (philo->rules->n_philo == 1)
 	{
 		taking_fork(philo);
@@ -33,9 +37,16 @@ void	*lifecycle(void *arg)
 		{
 			while (!check_death(philo) && !check_enough(philo))
 			{
-				activities(philo);
-				time_activity((philo->rules->time_to_die - timestamp()), philo);
-				check_death(philo);
+				// activities(philo);
+				taking_fork(philo);
+				eating(philo);
+				sleeping(philo);
+				thinking(philo);
+				// time_activity((philo->rules->time_to_die - timestamp()), philo);
+				// if (check_death(philo))
+				// 	break;
+				// if (check_enough(philo))
+				// 	break;
 			}
 		}
 		else
