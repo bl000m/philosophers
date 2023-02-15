@@ -25,39 +25,25 @@ void	*lifecycle(void *arg)
 	check_death(philo);
 	if (philo->rules->n_philo == 1)
 	{
-		taking_fork(philo);
+		// pthread_mutex_lock(&philo->rules->forks[philo->n]);
+		message(philo, 'f');
 		time_activity((philo->rules->time_to_die - timestamp()), philo);
-		pthread_mutex_unlock(&philo->rules->forks[philo->n]);
+		// pthread_mutex_unlock(&philo->rules->forks[philo->n]);
 		message(philo, 'd');
 		philo->rules->someone_is_dead = 1;
 	}
-	else
-	{
+	// else
+	// {
 		if (philo->rules->n_meals != -1)
 		{
 			while (!check_death(philo) && !check_enough(philo))
-			{
-				// activities(philo);
-				taking_fork(philo);
-				eating(philo);
-				sleeping(philo);
-				thinking(philo);
-				// time_activity((philo->rules->time_to_die - timestamp()), philo);
-				// if (check_death(philo))
-				// 	break;
-				// if (check_enough(philo))
-				// 	break;
-			}
+				activities(philo);
 		}
 		else
 		{
 			while (!check_death(philo))
-			{
 				activities(philo);
-				time_activity((philo->rules->time_to_die - timestamp()), philo);
-				check_death(philo);
-			}
 		}
-	}
+	// }
 	return (NULL);
 }

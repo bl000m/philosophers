@@ -59,6 +59,14 @@ void	time_activity(t_time millisec, t_philo *philo)
 
 	(void) philo;
 	start = timestamp();
-	while (timestamp() - start < millisec && !check_death(philo))
-		usleep(100);
+	if (philo->rules->n_meals != -1)
+	{
+		while (timestamp() - start < millisec && !check_death(philo) && !check_enough(philo))
+			usleep(100);
+	}
+	else
+	{
+		while (timestamp() - start < millisec && !check_death(philo))
+			usleep(100);
+	}
 }
